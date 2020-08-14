@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { Route, Switch } from 'react-router-dom';
+import Contact from './components/clock/clock';
+import Welcome from './components/welcome/welcome'
+import Clock from './components/clock/clock';
+import contact from './components/contact/contact'
+import Navigation from './components/navigation/Navigation'
+import NoMatch from './components/noMatch/NoMatch'
 
-function App() {
+
+function App() {  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navigation />
+      <Switch>
+        <Route
+          exact path="/"
+          render={(props) => <Welcome {...props} name="Tera" />} />
+        <Route path="/clock" component={Clock} />
+        <Route path="/contact" component={contact} />
+        <Route
+          path="/welcome/:name"
+          render={(props) => <Welcome {...props} name={props.match.params.name} />} />
+        <Route>
+          <NoMatch />
+        </Route>
+      </Switch>
     </div>
   );
 }
 
 export default App;
+
