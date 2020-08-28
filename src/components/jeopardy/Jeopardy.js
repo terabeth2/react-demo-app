@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 //import our service
 import JeopardyService from "../jeopardyService/JeopardyService";
+import Display from "../display/Display"
+
 
 class Jeopardy extends Component {
 
@@ -54,36 +56,13 @@ class Jeopardy extends Component {
     this.getNewQuestion();
   }
   //display the results on the screen
-  render() {
-    if (this.state.data.category === undefined)
-      return (
-
-        <div>
-          <h1>Loading ...</h1>
-        </div>
-      )
-
-    return (
-      <div>
-
-        <h2> Category: {(this.state.data.category.title)} </h2> <br />
-
-        <h3> Question: {(this.state.data.question)} </h3><br />
-
-        <h4> Point Value: {(this.state.data.value)} </h4><br />
-
-        <h4> Score: {(this.state.score)}</h4><br />
-
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label>Answer:</label>
-            <input onChange={this.handleChange} type="text" name="answer" value={this.state.formData.answer} />
-          </div>
-          <button>Submit Answer</button> <br />
-
-        </form>
-      </div>
-    );
-  }
+ render(){
+   return <Display
+    state={this.state} 
+    handleChange = {this.handleChange}
+     handleSubmit = {this.handleSubmit}
+     />
+   
+ }
 }
 export default Jeopardy;
